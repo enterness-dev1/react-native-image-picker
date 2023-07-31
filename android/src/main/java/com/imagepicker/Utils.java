@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.graphics.BitmapFactory;
 import android.hardware.camera2.CameraCharacteristics;
 import android.net.Uri;
@@ -188,11 +189,18 @@ public class Utils {
             try(InputStream imageStream = context.getContentResolver().openInputStream(uri)) {
                 String mimeType =  getMimeTypeFromFileUri(uri);
                 Bitmap b = BitmapFactory.decodeStream(imageStream);
-               
+                
+                Matrix matrix = new Matrix();
+                
+                matrix.postRotate(0);
+
                 b = Bitmap.createScaledBitmap(b, newDimens[0], newDimens[1], true);
-               
+                b = Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
+
                 String originalOrientation = getOrientation(uri, context);
 
+                // System.out.print("originalOrientation: %s",originalOrientation);
+                
                 File file = createFile(context, getFileTypeFromMime(mimeType));
 
                 try(OutputStream os = context.getContentResolver().openOutputStream(Uri.fromFile(file))) {
