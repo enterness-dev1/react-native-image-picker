@@ -28,6 +28,7 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.util.RNLog;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -199,7 +200,7 @@ public class Utils {
 
                 String originalOrientation = getOrientation(uri, context);
 
-                // System.out.print("originalOrientation: %s",originalOrientation);
+                RNLog.e("originalOrientation: " + originalOrientation);
 
                 File file = createFile(context, getFileTypeFromMime(mimeType));
 
