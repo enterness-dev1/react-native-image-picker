@@ -192,7 +192,7 @@ public class Utils {
                 
                 Matrix matrix = new Matrix();
                 
-                matrix.postRotate(0);
+                matrix.postRotate(90);
 
                 b = Bitmap.createScaledBitmap(b, newDimens[0], newDimens[1], true);
                 b = Bitmap.createBitmap(b, 0, 0, b.getWidth(), b.getHeight(), matrix, true);
@@ -200,7 +200,7 @@ public class Utils {
                 String originalOrientation = getOrientation(uri, context);
 
                 // System.out.print("originalOrientation: %s",originalOrientation);
-                
+
                 File file = createFile(context, getFileTypeFromMime(mimeType));
 
                 try(OutputStream os = context.getContentResolver().openOutputStream(Uri.fromFile(file))) {
